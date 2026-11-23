@@ -1,0 +1,52 @@
+CtrlEm Minecraft Bridge — Source-Available License
+
+Copyright (c) 2026 Emma (zzEmmazz). All rights reserved.
+
+This repository (the "Software") is published so people can read it, suggest
+changes and send contributions. It is NOT open source. Except for the limited
+permissions below, all rights stay with the copyright holder.
+
+1. What you MAY do
+   a. View and read the source code.
+   b. Fork this repository on the platform where it is hosted, and clone it.
+   c. Modify your fork for the sole purpose of preparing contributions
+      (pull requests, patches, issues) to this repository.
+   d. Build and run the Software, or your modified copy, on your own computer
+      for personal use and for testing your contributions.
+
+2. What you may NOT do without written permission from the copyright holder
+   a. Redistribute the Software or any modified version, in source or
+      compiled form (for example uploading jars to CurseForge, Modrinth,
+      other websites, modpacks or file hosts).
+   b. Publish a separate project, port or rebrand based on the Software.
+   c. Use the Software, or any part of it, commercially.
+   d. Use the Software to connect to services other than the official CtrlEm
+      service, or to build an unofficial CtrlEm client or bridge.
+   e. Remove or change this license or the copyright notices.
+
+3. Contributions
+   By submitting a contribution (pull request, patch, or code in an issue),
+   you confirm you have the right to submit it, and you grant the copyright
+   holder a perpetual, worldwide, non-exclusive, royalty-free, irrevocable
+   license to use, modify, sublicense, relicense and distribute that
+   contribution as part of the Software or otherwise. You keep the copyright
+   to your own contribution, but it becomes part of the Software under this
+   license.
+
+4. Official builds
+   Official compiled releases are only those published by the copyright
+   holder in this repository's Releases section or on ctrlem.com.
+
+5. Trademarks
+   This license grants no rights to the "CtrlEm" name, logo or branding.
+
+6. No warranty
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+   DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE SOFTWARE.
+
+7. Termination
+   Any permission above ends automatically if you break these terms.
+
+For permission beyond this license, contact the copyright holder via
+https://ctrlem.com.
