@@ -1,0 +1,144 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    }
+}
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'idea'
+    id 'eclipse'
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+// 1.18.2 ships Java 17 to end users, so the mod targets 17. Not 25, as the NeoForge build does.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    // Mojang's own names, same as the NeoForge build, so the two source trees read alike.
+    // Covered by Mojang's mapping licence: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+    mappings channel: 'official', version: minecraft_version
+
+    // This line is optional. Access Transformers are automatically detected.
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment.
+            // "SCAN": For mods scan. "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        // A second client for testing "Follow a player": open a world to LAN from runClient, join
+        // it from this one, and it's the player to follow. Own name and game folder, and it never
+        // connects to the CtrlEm bridge, so commands only ever reach runClient.
+        leader {
+            parent minecraft.runs.client
+            workingDirectory project.file('run-leader')
+            args '--username', 'Leader'
+            property 'ctrlem.bridge.disabled', 'true'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+    // No server or data runs: the mod is client-only and generates no resources.
+}
+
+repositories {
+    // Add here additional repositories if required by some of the dependencies below.
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+}
+
+// Expands the properties below into src/main/templates, so the version numbers live in
+// gradle.properties only. Same arrangement as the NeoForge build.
+def generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    def replaceProperties = [
+            minecraft_version_range: minecraft_version_range,
+            forge_version_range    : forge_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
+}
+sourceSets.main.resources.srcDir generateModMetadata
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"   : mod_id,
+                "Specification-Vendor"  : "CtrlEm",
+                "Specification-Version" : "1",
+                "Implementation-Title"  : project.name,
+                "Implementation-Version": project.jar.archiveVersion,
+                "Implementation-Vendor" : "CtrlEm",
+        ])
+    }
+}
+
+// The build compiles against Mojang names, which only exist in the dev environment. This maps the
+// jar back to the SRG names a real installation runs on. Without it the jar loads and then dies on
+// the first vanilla call. The NeoForge build has no equivalent step — it ships Mojang names.
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
+}
+tasks.withType(PublishToMavenRepository).configureEach {
+    dependsOn 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}

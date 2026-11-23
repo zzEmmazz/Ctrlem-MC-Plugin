@@ -1,0 +1,35 @@
+# The loader and its version range. 1.18.2 spells these differently from NeoForge: the file is
+# mods.toml rather than neoforge.mods.toml, dependencies use mandatory=true rather than
+# type="required", and there is no per-mod "side" key — see CtrlEmMod for how client-only is
+# declared instead.
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+
+# The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
+license="${mod_license}"
+
+# A URL to refer people to when problems occur with this mod
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+
+[[mods]] #mandatory
+modId="${mod_id}" #mandatory
+version="${mod_version}" #mandatory
+displayName="${mod_name}" #mandatory
+displayURL="https://ctrlem.com/" #optional
+description='''
+Lets people control your Minecraft client through CtrlEm. Client-side only: works on any server, and needs the CtrlEm "Minecraft" plugin running in the CtrlEm client.
+'''
+
+[[dependencies.${mod_id}]]
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="${forge_version_range}" #mandatory
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="CLIENT"

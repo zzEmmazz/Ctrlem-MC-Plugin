@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            name = 'MinecraftForge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+    }
+}
+
+// No foojay toolchain resolver, unlike the NeoForge project: ForgeGradle 5 caps this build at
+// Gradle 7.5.1, which predates toolchain auto-provisioning. The JDK 17 it needs has to already
+// be on the machine — see README.md.
+rootProject.name = 'ctrlem-forge'
