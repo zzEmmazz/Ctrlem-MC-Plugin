@@ -21,7 +21,7 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = mod_id
+    archivesName = 'ctrlem-forge-1.18.2'
 }
 
 // 1.18.2 ships Java 17 to end users, so the mod targets 17. Not 25, as the NeoForge build does.
