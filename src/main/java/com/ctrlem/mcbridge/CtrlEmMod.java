@@ -1,6 +1,6 @@
 package com.ctrlem.mcbridge;
 
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +11,6 @@ public final class CtrlEmMod {
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
     public CtrlEmMod() {
-        LOGGER.info("CtrlEm Forge 1.20.1 loaded; press F8 for CtrlEm settings");
+        LOGGER.info("CtrlEm NeoForge 1.21.1 loaded; press F8 for CtrlEm settings");
     }
 }

@@ -161,7 +161,7 @@ final class Actions {
             case "cave_noise" -> SoundSource.AMBIENT;
             default -> SoundSource.HOSTILE;
         };
-        SoundEvent event = net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.get(new ResourceLocation(id));
+        SoundEvent event = net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse(id));
         mc.level.playLocalSound(x, player.getY(), z, event, source, 1f, 1f, false);
         return null;
     }

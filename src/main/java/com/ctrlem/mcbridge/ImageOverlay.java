@@ -27,7 +27,7 @@ import net.minecraft.resources.ResourceLocation;
  * Images are downloaded off-thread and uploaded as a dynamic texture on the client thread.
  */
 final class ImageOverlay {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("ctrlem", "overlay/image");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("ctrlem", "overlay/image");
     private static final long MAX_BYTES = 15L * 1024 * 1024;
     private static final int MAX_DIMENSION = 4096;
     private static final long FADE_MILLIS = 250L;
@@ -168,6 +168,7 @@ final class ImageOverlay {
 
     private static void display(Minecraft mc, NativeImage image, int seconds) {
         clear(mc);
+        CtrlEmMod.LOGGER.info("Image displayed");
         mc.getTextureManager().register(TEXTURE, new DynamicTexture(image));
         imageWidth = image.getWidth();
         imageHeight = image.getHeight();

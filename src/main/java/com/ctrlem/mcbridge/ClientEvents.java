@@ -1,35 +1,36 @@
 package com.ctrlem.mcbridge;
 
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGuiEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 /** Runtime hooks on Forge's client-side gameplay/event bus. */
-@Mod.EventBusSubscriber(modid = CtrlEmMod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = CtrlEmMod.MODID, value = Dist.CLIENT)
 public final class ClientEvents {
     private ClientEvents() {}
 
     @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event) {
+    public static void onClientTickPre(ClientTickEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
-        if (event.phase == TickEvent.Phase.START) {
-            Follower.onStartTick(mc);
-            KeyHolder.onStartTick(mc);
-            while (ClientSetup.SETTINGS_KEY.consumeClick()) {
-                mc.setScreen(new ConfigScreen(mc.screen));
-            }
-        } else {
-            InventoryThrower.onEndTick(mc);
-            ImageOverlay.onEndTick(mc);
-            StateReporter.onEndTick(mc);
+        Follower.onStartTick(mc);
+        while (ClientSetup.SETTINGS_KEY.consumeClick()) {
+            mc.setScreen(new ConfigScreen(mc.screen));
         }
     }
 
     @SubscribeEvent
-    public static void onHudRender(RenderGuiEvent.Post event) {
+    public static void onClientTickPost(ClientTickEvent.Post event) {
+        Minecraft mc = Minecraft.getInstance();
+        InventoryThrower.onEndTick(mc);
+        ImageOverlay.onEndTick(mc);
+        StateReporter.onEndTick(mc);
+    }
+
+    @SubscribeEvent
+    public static void onHudRender(RenderGuiLayerEvent.Post event) {
         ImageOverlay.render(event.getGuiGraphics());
     }
 }

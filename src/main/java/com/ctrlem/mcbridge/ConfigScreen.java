@@ -161,7 +161,7 @@ final class ConfigScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(graphics);
+        renderBackground(graphics, mouseX, mouseY, partialTick);
         graphics.drawCenteredString(this.font,
             commandsPage ? "CtrlEm — Command Permissions" : "CtrlEm — Settings",
             this.width / 2, 23, 0xFFFFFF);
