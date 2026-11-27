@@ -1,27 +1,29 @@
 modLoader="javafml"
-loaderVersion="[4,)"
-license="All Rights Reserved"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
 
 [[mods]]
-modId="ctrlem"
-version="${file.jarVersion}"
+modId="${mod_id}"
+version="${mod_version}"
 displayName="CtrlEm Minecraft Bridge"
 authors="CtrlEm (community source port)"
 description='''
 Client-side CtrlEm desktop bridge, command permissions, F8 settings and image overlay.
 NeoForge 1.21.1 port based on the supplied decompiled CtrlEm sources.
 '''
+# Client-only: don't flag servers that lack the mod as incompatible.
+displayTest="IGNORE_SERVER_VERSION"
 
-[[dependencies.ctrlem]]
+[[dependencies.${mod_id}]]
 modId="neoforge"
 type="required"
-versionRange="[21.1,)"
+versionRange="${neo_version_range}"
 ordering="NONE"
 side="CLIENT"
 
-[[dependencies.ctrlem]]
+[[dependencies.${mod_id}]]
 modId="minecraft"
 type="required"
-versionRange="[1.21.1,1.22)"
+versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="CLIENT"

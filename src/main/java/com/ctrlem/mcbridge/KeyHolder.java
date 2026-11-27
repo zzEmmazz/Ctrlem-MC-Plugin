@@ -14,8 +14,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import org.lwjgl.glfw.GLFW;
 
+/** Tick-based synthetic key holds, with physical-key restoration on completion. */
 @EventBusSubscriber(modid = CtrlEmMod.MODID, value = Dist.CLIENT)
-final class KeyHolder {
+public final class KeyHolder {
     private static final Map<KeyMapping, Integer> HELD = new HashMap<>();
 
     private KeyHolder() {}
@@ -23,16 +24,16 @@ final class KeyHolder {
     static void hold(KeyMapping key, int ticks) { HELD.merge(key, ticks, Math::max); }
 
     @SubscribeEvent
-    static void onClientTick(ClientTickEvent.Pre event) {
+    public static void onClientTick(ClientTickEvent.Pre event) {
         if (HELD.isEmpty()) return;
         Minecraft mc = Minecraft.getInstance();
-        boolean inWorld = mc.player != null;
+        boolean active = mc.player != null && mc.screen == null && Config.INSTANCE.enabled;
 
         Iterator<Map.Entry<KeyMapping, Integer>> it = HELD.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<KeyMapping, Integer> entry = it.next();
             KeyMapping key = entry.getKey();
-            if (!inWorld || entry.getValue() <= 0) {
+            if (!active || entry.getValue() <= 0) {
                 release(mc, key);
                 it.remove();
             } else {
@@ -58,6 +59,7 @@ final class KeyHolder {
     }
 
     private static boolean isPhysicallyDown(Minecraft mc, KeyMapping key) {
+        if (key.isUnbound()) return false;
         InputConstants.Key bound = key.getKey();
         long windowHandle = mc.getWindow().getWindow();
 

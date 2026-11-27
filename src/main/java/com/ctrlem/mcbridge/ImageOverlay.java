@@ -23,7 +23,7 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.resources.ResourceLocation;
 
 /**
- * Forge 1.20.1 HUD implementation of the original CtrlEm image action.
+ * NeoForge 1.21.1 HUD implementation of the original CtrlEm image action.
  * Images are downloaded off-thread and uploaded as a dynamic texture on the client thread.
  */
 final class ImageOverlay {
@@ -168,7 +168,6 @@ final class ImageOverlay {
 
     private static void display(Minecraft mc, NativeImage image, int seconds) {
         clear(mc);
-        CtrlEmMod.LOGGER.info("Image displayed");
         mc.getTextureManager().register(TEXTURE, new DynamicTexture(image));
         imageWidth = image.getWidth();
         imageHeight = image.getHeight();

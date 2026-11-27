@@ -9,7 +9,7 @@ so people you allow on [CtrlEm](https://ctrlem.com) can trigger in-game actions.
 |-------------------------------------------------| --- |-----------| --- |
 | [`neoforge-26.1.2`](../../tree/neoforge-26.1.2) | NeoForge 26.1.2.106+ | 26.1.x    | Mods → CtrlEm → Config |
 | [`fabric-1.21.11`](../../tree/fabric-1.21.11)   | Fabric + Fabric API | 1.21.11   | F8 in game |
-| [`neoforge-1.21.1`](../../tree/forge-1.20.1)    | NeoForge 21.1.0+ | 1.21.1    | F8 in game |
+| [`neoforge-1.21.1`](../../tree/neoforge-1.21.1) | NeoForge 21.1.264+ | 1.21.1    | F8 in game |
 | [`forge-1.20.1`](../../tree/forge-1.20.1)       | Forge 47+ | 1.20.1    | F8 in game |
 | [`forge-1.18.2`](../../tree/forge-1.18.2)       | Forge 40+ | 1.18.2    | Mods → CtrlEm → Config |
 

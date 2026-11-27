@@ -3,11 +3,11 @@ package com.ctrlem.mcbridge;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
-/** Runtime hooks on Forge's client-side gameplay/event bus. */
+/** Runtime hooks on NeoForge's client-side game event bus. */
 @EventBusSubscriber(modid = CtrlEmMod.MODID, value = Dist.CLIENT)
 public final class ClientEvents {
     private ClientEvents() {}
@@ -30,7 +30,7 @@ public final class ClientEvents {
     }
 
     @SubscribeEvent
-    public static void onHudRender(RenderGuiLayerEvent.Post event) {
+    public static void onHudRender(RenderGuiEvent.Post event) {
         ImageOverlay.render(event.getGuiGraphics());
     }
 }
