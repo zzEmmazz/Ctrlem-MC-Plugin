@@ -6,12 +6,13 @@ Thanks for helping with the CtrlEm Minecraft Bridge.
 
 Each mod loader / Minecraft version lives on its own branch:
 
-| Branch | Loader | Minecraft | Java to run Gradle |
-| --- | --- | --- | --- |
-| `neoforge-26.1.2` | NeoForge 26.1.2.106+ | 26.1.x | 21+ (Java 25 is downloaded for compiling) |
-| `fabric-1.21.11` | Fabric Loader 0.18.1+ with Fabric API | 1.21.11 | 25 |
-| `forge-1.20.1` | Forge 47+ | 1.20.1 | 17 to 22 |
-| `forge-1.18.2` | Forge 40+ | 1.18.2 | 17 only (Gradle 7.5.1) |
+| Branch            | Loader | Minecraft | Java to run Gradle                        |
+|-------------------| --- |-----------|-------------------------------------------|
+| `neoforge-26.1.2` | NeoForge 26.1.2.106+ | 26.1.x    | 21+ (Java 25 is downloaded for compiling) |
+| `fabric-1.21.11`  | Fabric Loader 0.18.1+ with Fabric API | 1.21.11   | 25                                        |
+| `neoforge-1.21.1` | NeoForge 21.1.264+ | 1.21.1    | 21 to 22                                  |
+| `forge-1.20.1`    | Forge 47+ | 1.20.1    | 17 to 22                                  |
+| `forge-1.18.2`    | Forge 40+ | 1.18.2    | 17 only (Gradle 7.5.1)                    |
 
 `main` only holds the README, license and this guide. Open pull requests
 against the branch for the version you changed. If a fix applies to both,
